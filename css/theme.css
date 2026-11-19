@@ -1,0 +1,93 @@
+:root {
+  /* Minimalist Arcane / Gamer Palette */
+  --bg-obsidian: #0d111a;
+  --bg-surface: #141a26;
+  --bg-elevated: #1c2434;
+  --bg-hover: #242e42;
+  --bg-glass: rgba(20, 26, 38, 0.92);
+
+  --border-subtle: rgba(148, 163, 184, 0.14);
+  --border-gold: rgba(212, 175, 55, 0.42);
+  --border-arcane: rgba(56, 189, 148, 0.42);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Accents */
+  --gold: #eab308;
+  --gold-bright: #fde047;
+  --gold-dim: rgba(234, 179, 8, 0.14);
+
+  --arcane: #10b981;
+  --arcane-bright: #34d399;
+  --arcane-dim: rgba(16, 185, 129, 0.14);
+
+  --crimson: #ef4444;
+  --crimson-bright: #f87171;
+  --crimson-dim: rgba(239, 68, 68, 0.15);
+
+  --frenzy: #f97316;
+  --frenzy-bright: #fb923c;
+  --frenzy-dim: rgba(249, 115, 22, 0.18);
+
+  --royal: #8b5cf6;
+  --royal-dim: rgba(139, 92, 246, 0.16);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cinzel', 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radii & Shadows */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-glow-gold: 0 0 18px rgba(234, 179, 8, 0.22);
+  --shadow-glow-frenzy: 0 0 22px rgba(249, 115, 22, 0.38);
+
+  --transition-fast: 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-med: 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-obsidian);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+h1, h2, h3, .brand-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: #2c374e;
+  border-radius: 3px;
+}
