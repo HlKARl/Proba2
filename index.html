@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#101714" />
+  <meta name="description" content="PROBA — convierte el estudio en una aventura." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>PROBA · Aventura de conocimiento</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Proba, inicio"><span class="brand-mark">P</span><span>PROBA<small>AVENTURA DE CONOCIMIENTO</small></span></a>
+      <div class="top-actions">
+        <div class="wallet"><span class="coin">◈</span><span id="goldBalance">0</span><small>ORO</small></div>
+        <button class="icon-button" id="settingsButton" title="Configuración" aria-label="Configuración">⚙</button>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="view active" id="view-inicio">
+        <div class="hero panel">
+          <div class="hero-copy">
+            <span class="eyebrow">TU PRÓXIMA AVENTURA COMIENZA AQUÍ</span>
+            <h1>Aprende. <em>Juega.</em><br/>Conquista.</h1>
+            <p>El conocimiento es tu mejor equipo. Organiza tus materias, prepara tu personaje y demuestra lo que sabes.</p>
+            <button class="primary-button" data-nav="aventura">Comenzar aventura <span>↗</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="rune rune-one">✧</div><div class="rune rune-two">ᛟ</div><div class="orb"><div class="orb-core">P</div></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="hero-caption">CONOCIMIENTO<br/><b>+ EXPERIENCIA</b></div></div>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">TU BIBLIOTECA</span><h2>Materias</h2></div><button class="soft-button" id="addSubjectButton">＋ Nueva materia</button></div>
+        <div id="subjectGrid" class="subject-grid"></div>
+        <div class="empty-state panel" id="emptyLibrary"><div class="empty-symbol">⌘</div><h3>Tu aventura está por comenzar</h3><p>Crea una materia e importa tu primer banco de preguntas para empezar a jugar.</p><button class="primary-button" id="emptyAddSubject">Crear primera materia</button></div>
+        <div class="dashboard-bottom">
+          <div class="mini-panel"><span class="eyebrow">CAMPAÑAS COMPLETADAS</span><strong id="completedCampaigns">0</strong><span class="muted">Victorias registradas</span></div>
+          <div class="mini-panel"><span class="eyebrow">PREGUNTAS CORRECTAS</span><strong id="totalCorrect">0</strong><span class="muted">Conocimiento acumulado</span></div>
+          <div class="mini-panel"><span class="eyebrow">CLASE FAVORITA</span><strong id="favoriteClass">—</strong><span class="muted">Según tus campañas</span></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-aventura">
+        <div class="page-heading"><span class="eyebrow">MODO DE JUEGO</span><h1>Prepara tu <em>aventura</em></h1><p>Tus documentos seleccionados quedan guardados para tus próximas partidas. Elige el modo y comienza.</p></div>
+        <div class="adventure-layout">
+          <div class="panel selection-panel">
+            <div class="section-heading compact"><div><span class="eyebrow">BANCO DE PREGUNTAS</span><h2>Fuentes activas</h2></div><button class="text-button" id="selectAllDocs">Seleccionar todo</button></div>
+            <div id="adventureDocuments" class="adventure-docs"></div>
+            <div id="noDocsHint" class="inline-empty">Primero importa documentos en la sección <b>Inicio</b>.</div>
+            <div class="selection-summary"><span id="selectedCount">0 documentos seleccionados</span><span id="availableQuestions">0 preguntas disponibles</span><small>La selección se recuerda automáticamente.</small></div>
+          </div>
+          <div class="panel config-panel">
+            <span class="eyebrow">PREPARA TU PARTIDA</span><h2>Elige cómo jugar</h2>
+            <label class="field-label">Modo de juego</label>
+            <div class="mode-switch"><button class="mode-option selected" data-mode="campaign"><span>⚔</span><b>Campaña</b><small>30 preguntas · 3 niveles</small></button><button class="mode-option" data-mode="study"><span>✎</span><b>Estudio</b><small>Sin riesgos · aprende</small></button></div>
+            <div id="campaignOptions">
+              <div class="chosen-class-strip"><span class="chosen-class-icon" id="chosenClassIcon">影</span><div><b id="chosenClassName">Ninja</b><small id="chosenClassAbility">Velocidad y dominio</small></div><button class="text-button" data-nav="personaje">Cambiar clase</button></div>
+              <div class="campaign-preview"><div class="preview-title">RUTA DE CAMPAÑA <span>30 PREGUNTAS</span></div><div class="level-track"><div><i>Ⅰ</i><b>Nivel I</b><small>5 preguntas</small></div><div><i>Ⅱ</i><b>Nivel II</b><small>10 preguntas</small></div><div><i>Ⅲ</i><b>Nivel III</b><small>15 preguntas</small></div></div><p>Los puntos de control se activan cada 5 preguntas.</p></div>
+              <div class="frenzy-note"><span>✦</span><div><b>Frenesí</b><small>Completa los dos primeros niveles en menos de 2 min y medio (150 s) para activar comodines ilimitados en el nivel III durante 45 segundos.</small></div></div>
+            </div>
+            <div id="studyOptions" class="hidden"><label class="field-label" for="studyCount">Preguntas de práctica</label><select id="studyCount" class="select-field"><option value="5">5 preguntas</option><option value="10">10 preguntas</option><option value="15" selected>15 preguntas</option><option value="30">30 preguntas</option><option value="all">Todas las disponibles</option></select><p class="muted small">Sin temporizador ni penalizaciones. Solo ganas oro al dominar una pregunta nueva por primera vez; las repetidas no pagan.</p></div>
+            <button class="primary-button full-width" id="startGameButton" disabled>Comenzar partida <span>→</span></button>
+            <p class="micro-note" id="startNote">Selecciona documentos con al menos 30 preguntas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-personaje">
+        <div class="page-heading"><span class="eyebrow">TU IDENTIDAD Y PROGRESIÓN</span><h1>Forja tu <em>personaje</em></h1><p>Elige aquí tu clase activa y desarrolla sus 5 niveles. Desbloquea cada sacrificio para acceder a su mejora y maestría.</p></div>
+        <div class="class-layout"><div id="classCards" class="class-cards"></div><div class="panel tree-panel"><div id="treeHeader"></div><div id="skillTree" class="skill-tree"></div></div></div>
+      </section>
+
+      <section class="view" id="view-registro">
+        <div class="page-heading"><span class="eyebrow">TU TRAYECTORIA</span><h1>Registro de <em>aventuras</em></h1><p>Revisa tus resultados y observa cómo evoluciona tu conocimiento.</p></div>
+        <div class="stats-grid"><div class="mini-panel"><span class="eyebrow">ORO TOTAL ACTUAL</span><strong id="statGold">0</strong><span class="muted">Monedas disponibles</span></div><div class="mini-panel"><span class="eyebrow">CAMPAÑAS</span><strong id="statRuns">0</strong><span class="muted">Partidas terminadas</span></div><div class="mini-panel"><span class="eyebrow">PRECISIÓN GLOBAL</span><strong id="statAccuracy">—</strong><span class="muted">En todas las partidas</span></div><div class="mini-panel"><span class="eyebrow">RÉCORD DE FRENESÍ</span><strong id="statFrenzy">—</strong><span class="muted">Tiempo en niveles I y II</span></div></div>
+        <div class="section-heading"><div><span class="eyebrow">HISTORIAL</span><h2>Últimas partidas</h2></div><button class="text-button" id="clearHistoryButton">Limpiar registro</button></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button class="nav-item active" data-nav="inicio"><span>⌂</span><small>Inicio</small></button>
+      <button class="nav-item" data-nav="aventura"><span>⚔</span><small>Aventura</small></button>
+      <button class="nav-item" data-nav="personaje"><span>♙</span><small>Personaje</small></button>
+      <button class="nav-item" data-nav="registro"><span>▤</span><small>Registro</small></button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop"><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><span class="eyebrow" id="modalEyebrow">PROBA</span><h2 id="modalTitle">Ventana</h2></div><button class="icon-button" id="closeModal" aria-label="Cerrar">×</button></div><div id="modalBody"></div></section></div>
+
+  <div class="game-overlay hidden" id="gameOverlay"><div class="game-shell"><header class="game-header"><button class="icon-button" id="exitGameButton" aria-label="Salir">✕</button><div class="game-brand">PROBA <small id="gameModeLabel">CAMPAÑA</small></div><div class="game-wallet"><span class="coin">◈</span><b id="gameGold">0</b></div></header><div class="game-progress"><div class="game-meta"><span id="gameLevelLabel">NIVEL I</span><span id="gameQuestionLabel">PREGUNTA 1 / 30</span><span id="gameTimer">00:00</span></div><div class="progress-track"><div id="gameProgressFill"></div></div><div id="checkpointLabel" class="checkpoint-label">Próximo punto de control: pregunta 5</div><div id="gameFrenzy" class="frenzy-banner hidden">✦ FRENESÍ ACTIVADO <span id="frenzyTimer">00:45</span></div></div><div class="game-content"><div class="question-card" id="questionCard"><div class="question-top"><span class="question-tag" id="questionSubject">MATERIA</span><span class="question-reward" id="questionReward">+1.000 ◈</span></div><h1 id="questionText">Pregunta</h1><div id="answerList" class="answer-list"></div><div class="answer-hint" id="answerHint">Selecciona una respuesta y vuelve a pulsarla para confirmar.</div><div class="explanation hidden" id="explanationBox"></div><button class="primary-button full-width hidden" id="nextQuestionButton">Siguiente pregunta <span>→</span></button></div><aside class="game-sidebar"><div class="player-card"><div class="player-emblem" id="playerEmblem">✦</div><div><b id="playerClassName">Ninja</b><small id="playerClassAbility">Habilidad de clase</small></div></div><div class="class-skill-box hidden" id="classSkillBox"><button class="class-skill-button" id="classSkillButton" type="button"><span id="classSkillIcon">⚡</span><span><b id="classSkillTitle">Habilidad</b><small id="classSkillSub">Disponible</small></span><kbd id="classSkillCount">0</kbd></button></div><div class="run-earnings"><small>ORO DE ESTA CAMPAÑA</small><strong id="runGold">0</strong><span id="securedGold">0 asegurado</span></div><div class="joker-box"><span class="eyebrow">COMODINES (1 POR PREGUNTA)</span><button class="joker-button" data-joker="fifty" title="50/50: elimina alternativas incorrectas" aria-label="Comodín 50/50: elimina alternativas incorrectas"><span>½</span><span><b>50 / 50</b><small>Elimina opciones</small></span><kbd id="jokerFifty">1</kbd></button><button class="joker-button" data-joker="hint" title="Hint: muestra la explicación" aria-label="Comodín Hint: muestra la explicación"><span>✧</span><span><b>Hint</b><small>Revisa la explicación</small></span><kbd id="jokerHint">1</kbd></button><button class="joker-button" data-joker="retry" title="Reintentar: permite corregir un error" aria-label="Comodín reintentar: permite corregir un error"><span>↶</span><span><b>Reintentar</b><small>Permite corregir un error</small></span><kbd id="jokerRetry">1</kbd></button></div><button class="retire-button" id="retireGameButton">Retirarse</button></aside></div></div></div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

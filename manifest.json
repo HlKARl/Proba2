@@ -1,0 +1,11 @@
+{
+  "name": "PROBA — Aventura de conocimiento",
+  "short_name": "PROBA",
+  "description": "Convierte el estudio en una aventura.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1411",
+  "theme_color": "#101714",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
